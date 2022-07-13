@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../boot/css/bootstrap.css">
+  <link rel="stylesheet" href="../boot/css/bootstrap-icons.css">
+  <script src="../boot/js/bootstrap.bundle.js"></script>
+  <title>主页</title>
+  <style></style>
+</head>
+<body style="background-image:url(../img/bg.png)">
+  <!-- nav搜索页面 -->
+  <div class="sp-header navbar navbar-expand-lg navbar-light bg-light mb-1">
+    <div class="container">
+      <!-- logo -->
+      <a href="http://127.0.0.1:3030/header.html" class="navbar-brand">
+      <img src="./img/logo.png" alt=""></a>
+      </a>
+      <!-- 小菜单 -->
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#big-menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- 大菜单 -->
+      <div id="big-menu" class="collapse navbar-collapse justify-content-between">
+        <!-- 搜索完全自定义样式 -->
+        <div class="xz-search w-50 border border-warning d-flex justify-content-between" style="height:34px;">
+          <input type="text" class="border border-0 w-75 bg-transparent" style="outline: none;" id="cxmsg">
+          <a href="http://127.0.0.1:3030/alllist.html"><span class="bi-search me-2 text-warning"style="line-height: 34px;" id="cx"></span></a>
+        </div>
+        <!-- 右侧菜单 -->
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="http://127.0.0.1:3030/rootlogin.html" class="nav-link text-black">管理员登录</a>
+          </li>
+       </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

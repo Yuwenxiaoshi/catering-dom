@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../boot/css/bootstrap.css">
+  <link rel="stylesheet" href="../boot/css/bootstrap-icons.css">
+  <script src="../boot/js/bootstrap.bundle.js"></script>
+  <title>主页</title>
+  <style></style>
+  <link rel="shortcut icon" href="./img/html.ico">
+</head>
+
+<body style="background-image:url(../img/bg.png)">
+  <!-- nav搜索页面 -->
+  <div class="sp-header navbar navbar-expand-lg navbar-light bg-light mb-1">
+    <div class="container">
+      <!-- logo -->
+      <a href="http://127.0.0.1:3030/header.html" class="navbar-brand">
+        <img src="./img/logo.png" alt=""></a>
+      </a>
+      <!-- 小菜单 -->
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#big-menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- 大菜单 -->
+      <div id="big-menu" class="collapse navbar-collapse justify-content-between">
+        <!-- 搜索完全自定义样式 -->
+        <div class="xz-search w-50 border border-warning d-flex justify-content-between" style="height:34px;">
+          <input type="text" class="border border-0 w-75 bg-transparent" style="outline: none;" id="cxmsg">
+          <a href="http://127.0.0.1:3030/alllist.html"><span class="bi-search me-2 text-warning"
+              style="line-height: 34px;" id="cx"></span></a>
+        </div>
+        <!-- 右侧菜单 -->
+        <ul class="nav nav-pills" id="usernav">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- nav导航文字 -->
+  <div class="sp-nav mb-2">
+    <div class="container">
+      <ul class="nav bg-light">
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/header.html" class="nav-link text-black">首页</a>
+        </li>
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/activity.html" class="nav-link text-black">活动中心</a>
+        </li>
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/alllist.html" class="nav-link text-black">商品列表</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 网页主体 -->
+  <div class="container">
+    <div class="row">
+      <div class="col-2 d-lg-block d-none">
+        <div class="h-100">
+          <img src="./img/小女孩和兔子躲在墙后.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+      </div>
+      <div class="col-12 col-lg-10">
+        <table class="table table-striped table-hover">
+          <thead id="listhead">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">商品名</th>
+              <th scope="col">价格</th>
+              <th scope="col">数量</th>
+              <th scope="col">总价</th>
+              <th scope="col">选择</th>
+            </tr>
+          </thead>
+          <tbody id="list">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- 页脚 -->
+  <div class="sp-foot">
+    <div class="container">
+      <ul class="nav justify-content-center bg-light">
+        <li class="nav-item text-center d-none d-lg-block">
+          <img src="./img/left.png" alt="">
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">买家帮助</h5>
+          </a>
+          <a class="nav-link text-black" aria-current="page" href="#">新手指南</a>
+          <a class="nav-link text-black" aria-current="page" href="#">服务保障</a>
+          <a class="nav-link text-black" aria-current="page" href="#">常见问题</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">商家帮助</h5>
+          </a>
+          <a class="nav-link text-black" href="#">商家入驻</a>
+          <a class="nav-link text-black" href="#">商家后台</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">关于我们</h5>
+          </a>
+          <a class="nav-link text-black" href="#">联系我们</a>
+          <a class="nav-link text-black" href="#">广告投放</a>
+        </li>
+        <li class="nav-item text-center d-none d-lg-block">
+          <img src="./img/right.png" alt="">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    const list = document.querySelector('#list')
+    function uname() {
+      let usernav = document.querySelector('#usernav')
+      var userInfo = window.sessionStorage.getItem('user_name')
+      if (userInfo) {
+        usernav.innerHTML = `
+          <li class="nav-item">
+            <a class="nav-link text-dark" aria-current="page" href="http://127.0.0.1:3030/Shoppingcart.html" id="cart"><span class="bi-cart"></span>购物车</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#" style='user-select:none;'>欢迎:</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">${userInfo}</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">个人信息</a></li>
+              <li><a class="dropdown-item" href="#">实名认证</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" id="quit" href="javascript:location.reload();" onclick="window.sessionStorage.clear(); ">退出账号</a>
+              </li>
+            </ul>
+          </li>
+      `
+      } else {
+        usernav.innerHTML = `
+          <li class="nav-item" id="cart">
+            <a class="nav-link text-dark" aria-current="page" id="cart"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="http://127.0.0.1:3030/register.html">注册</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="http://127.0.0.1:3030/login.html">登录</a>
+          </li>
+        `
+      }
+    }
+
+    function shopping() {
+      let xhr = new XMLHttpRequest()
+      var userInfo = window.sessionStorage.getItem('user_name')
+      xhr.open('GET', `http://127.0.0.1:3030/v2/pro/shopping?user_name=${userInfo}`)
+      xhr.onload = function () {
+        var obj = JSON.parse(xhr.responseText)
+        list.innerHTML = ''
+        if(obj.code==200){
+          for (let i = 0; i < obj.data.length; i++) {
+            list.innerHTML += `
+            <tr>
+                <th scope="row" class='listid'>${i+1}</th>
+                <td>${obj.data[i].title}</td>
+                <td class='text-danger'>￥${obj.data[i].price}</td>
+                <td><span class="bi bi-dash-square me-1 minus" data-count="${obj.data[i].count}" data-title="${obj.data[i].title}"></span><span>${obj.data[i].count}</span><span class="bi bi-plus-square ms-1 add" data-count="${obj.data[i].count}" data-title="${obj.data[i].title}"></span></td>
+                <td class='text-danger'>￥${obj.data[i].count * obj.data[i].price}</td>
+                <td><input class="form-check-input" type="checkbox" data-allprice="${obj.data[i].count * obj.data[i].price}" data-title="${obj.data[i].title}" id="listid"></td>
+              </tr>
+            `
+          }
+          list.innerHTML += `
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td>总价:</td>
+                <td id='allprice' class="text-danger">￥0</td>
+                <td><button class="btn btn-warning" id="del">删除</button> <button class="btn btn-warning" id="buy">购买</button></td>
+              </tr>
+          `
+        }else{
+          listhead.innerHTML=``
+          list.innerHTML +=`
+          <div style="text-align:center">
+            <img src="./img/shoppingcart null.png" class="img-fluid" alt="..." style="height:400px">
+            <P class="text-dark fs-1">购物车为空</P>
+            </div>
+          `
+        }
+        }
+      xhr.send()
+    }
+
+    let num = 0
+    list.onclick = function (e) {
+      if (e.target.className == "form-check-input") {
+        if (e.target.checked) {
+          console.log(e.target.dataset.allprice);
+          num += e.target.dataset.allprice * 1
+          console.log(num);
+        } else {
+          num -= e.target.dataset.allprice * 1
+          if (num <= 0) {
+            num = 0
+          }
+        }
+        document.querySelector('#allprice').innerHTML = '￥' + num
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let xhr = new XMLHttpRequest()
+        let check = 0
+        if (e.target.checked) {
+          check = 1
+        } else {
+          check = 0
+        }
+        let data = `check=${check}&user_name=${userInfo}&title=${e.target.dataset.title}`
+        xhr.open('PUT', 'http://127.0.0.1:3030/v2/pro/put')
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        xhr.onload = function () {
+        }
+        xhr.send(data)
+      }
+
+
+      if(e.target.className=="bi bi-plus-square ms-1 add"){
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let nums=e.target.dataset.count * 1 + 1
+        let xhr = new XMLHttpRequest()
+        let data=`count=${nums}&user_name=${userInfo}&title=${e.target.dataset.title}`
+        xhr.open('PUT','http://127.0.0.1:3030/v2/pro/putselect')
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded;charset=UTF-8')
+        xhr.onload=function(){
+          let obj=JSON.parse(xhr.responseText)
+          if(obj.code==200){
+            location.reload();
+          }
+          else{
+            alert('失败,请重试')
+          }
+        }
+        xhr.send(data)
+      }
+
+      if(e.target.className=="bi bi-dash-square me-1 minus"){
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let nums=e.target.dataset.count * 1 - 1
+        if(nums <=1){
+          nums=1
+        }
+        let xhr = new XMLHttpRequest()
+        let data=`count=${nums}&user_name=${userInfo}&title=${e.target.dataset.title}`
+        xhr.open('PUT','http://127.0.0.1:3030/v2/pro/putselect')
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded;charset=UTF-8')
+        xhr.onload=function(){
+          let obj=JSON.parse(xhr.responseText)
+          if(obj.code==200){
+            location.reload();
+          }
+          else{
+            alert('失败,请重试')
+          }
+        }
+        xhr.send(data)
+      }
+    }
+    //
+    function listcheck() {
+      var userInfo = window.sessionStorage.getItem('user_name')
+      let xhr = new XMLHttpRequest()
+      let data = `user_name=${userInfo}`
+      xhr.open('PUT', 'http://127.0.0.1:3030/v2/pro/putall')
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+      xhr.onload = function () {
+      }
+      xhr.send(data)
+    }
+    //
+    setTimeout(() => {
+      const buy=document.querySelector('#buy')
+      if(buy){
+        buy.onclick=function(){
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let xhr=new XMLHttpRequest()
+        xhr.open('DELETE',`http://127.0.0.1:3030/v2/pro/buy?user_name=${userInfo}`)
+        xhr.onload=function(){
+          let obj=JSON.parse(xhr.responseText)
+          console.log(obj);
+          if(obj.code==200){
+            alert('购买成功,外卖员即将送货上门')
+            window.location.href="http://127.0.0.1:3030/Shoppingcart.html"
+          }else if(obj.code==201){
+            alert('购买失败,请重试')
+            window.location.href="http://127.0.0.1:3030/Shoppingcart.html"
+          }
+        }
+        xhr.send()
+      }
+      }
+      const del=document.querySelector('#del')
+      if(del){
+        del.onclick=function(){
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let xhr=new XMLHttpRequest()
+        xhr.open('DELETE',`http://127.0.0.1:3030/v2/pro/buy? user_name=${userInfo}`)
+        xhr.onload=function(){
+          let obj=JSON.parse(xhr.responseText)
+          if(obj.code==200){
+            alert('删除成功')
+            window.location.href="http://127.0.0.1:3030/Shoppingcart.html"
+          }else{
+            alert('删除失败,请重试')
+            window.location.href="http://127.0.0.1:3030/Shoppingcart.html"
+          }
+        }
+        xhr.send()
+      }
+      }
+    }, 500);
+
+    window.onload = function () {
+      uname();
+      shopping();
+      listcheck();
+    }
+  </script>
+</body>
+
+</html>

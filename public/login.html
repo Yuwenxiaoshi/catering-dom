@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>登录</title>
+  <link rel="stylesheet" href="./boot/css/login.css">
+  <link rel="shortcut icon" href="./img/html.ico">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome</h1>
+    <div class="form">
+      <input type="text" placeholder="您的账号" id="uname">
+      <input type="password" placeholder="您的密码" id="upwd2">
+      <span style="text-decoration: none;color:#ff467a;font-size: 0.75rem;margin-top: -10px;" id="msg">----</span>
+      <button class="btn-login" id="btn">登录</button>
+      <a href="http://127.0.0.1:3030/register.html" style="text-decoration: none;color:#ff467a;font-size: 0.75rem;">没有帐号?在这注册</a>
+      <a href="http://127.0.0.1:3030/header.html" style="text-decoration: none;color:#ff467a;font-size: 0.75rem;">首页</a>
+    </div>
+  </div>
+  <ul class="bg-squares">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script>
+    //
+    window.onload =function () {
+      const uname=document.querySelector('#uname')
+      var userInfo=window.sessionStorage.getItem('uname')
+      uname.value =userInfo
+    }
+
+    btn.onclick = function () {
+      let name = uname.value
+      let pwd = upwd2.value
+      let data=`uname=${name}&upwd=${pwd}`
+      let xhr = new XMLHttpRequest()
+      xhr.open("POST", `http://127.0.0.1:3030/v2/pro/login`)
+      xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded;charset=UTF-8')
+      xhr.onload = function () {
+        let obj = JSON.parse(xhr.responseText)
+        if (obj.code == 200) {
+          msg.innerHTML = '登陆成功'
+            const container = document.querySelector('.container');
+            container.classList.add('success');
+          setTimeout(() => {
+            window.sessionStorage.setItem('user_name',obj.data[0].user_name)
+            window.location.href = 'http://127.0.0.1:3030/header.html'
+          }, 1200);
+    } else {
+      msg.innerHTML = '登录失败,请检查用户名或密码'
+    }
+    }
+    xhr.send(data)
+    }
+    upwd2.onkeydown=function(e){
+      if(e.keyCode==13){
+          let name = uname.value
+          let pwd = upwd2.value
+          let data=`uname=${name}&upwd=${pwd}`
+          let xhr = new XMLHttpRequest()
+          xhr.open("POST", `http://127.0.0.1:3030/v2/pro/login`)
+          xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded;charset=UTF-8')
+          xhr.onload = function () {
+            let obj = JSON.parse(xhr.responseText)
+            if (obj.code == 200) {
+              msg.innerHTML = '登陆成功'
+                const container = document.querySelector('.container');
+                container.classList.add('success');
+              setTimeout(() => {
+                window.sessionStorage.setItem('user_name',obj.data[0].user_name)
+                window.location.href = 'http://127.0.0.1:3030/header.html'
+              }, 1200);
+        } else {
+          msg.innerHTML = '登录失败,请检查用户名或密码'
+        }
+        }
+        xhr.send(data)
+      }
+    }
+  </script>
+</body>
+</html>

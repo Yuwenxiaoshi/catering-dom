@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./boot/css/bootstrap.css">
+  <link rel="stylesheet" href="./boot/css/bootstrap-icons.css">
+  <script src="./boot/js/bootstrap.bundle.js"></script>
+  <title>商品</title>
+  <style></style>
+  <link rel="shortcut icon" href="./img/html.ico">
+</head>
+
+<body style="background-image: url(./img/bg.png);">
+  <!-- nav搜索页面 -->
+  <div class="sp-header navbar navbar-expand-lg navbar-light bg-light mb-1">
+    <div class="container">
+      <!-- logo -->
+      <a href="http://127.0.0.1:3030/header.html" class="navbar-brand">
+        <img src="./img/logo.png" alt=""></a>
+      </a>
+      <!-- 小菜单 -->
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#big-menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- 大菜单 -->
+      <div id="big-menu" class="collapse navbar-collapse justify-content-between">
+        <!-- 搜索完全自定义样式 -->
+        <div class="xz-search w-50 border border-warning d-flex justify-content-between" style="height:34px;">
+          <input type="text" class="border border-0 w-75 bg-transparent" style="outline: none;" id="ss">
+          <span class="bi-search me-2 text-warning" style="line-height: 34px;" id="ssbtn"></span>
+        </div>
+        <!-- 右侧菜单 -->
+        <ul class="nav nav-pills" id="usernav">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- nav导航文字 -->
+  <div class="sp-nav mb-2">
+    <div class="container">
+      <ul class="nav bg-light">
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/header.html" class="nav-link text-black">首页</a>
+        </li>
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/activity.html" class="nav-link text-black">活动中心</a>
+        </li>
+        <li class="nav-item">
+          <a href="http://127.0.0.1:3030/alllist.html" class="nav-link text-black">商品列表</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 网页主体 -->
+  <div class="sp-body ">
+    <div class="container">
+      <div class="row">
+        <!-- 详情 -->
+        <div class="col-12 col-lg-9">
+          <div class="row" id="ship">
+          </div>
+          <!-- 按钮遍历 -->
+          <div class="row">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group me-2" role="group" aria-label="First group" id="btns">
+                <!-- <button type="button" class="btn btn-warning">1</button>
+                <button type="button" class="btn btn-warning">2</button>
+                <button type="button" class="btn btn-warning">3</button>
+                <button type="button" class="btn btn-warning">4</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 公告 -->
+        <div class="col-lg-3 d-none d-lg-block">
+          <div class="h-100">
+            <img src="./img/小女孩和兔子躲在墙后(右).png" alt="" style="width: 100%;height: 100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 页脚 -->
+  <div class="sp-foot mt-4">
+    <div class="container">
+      <ul class="nav justify-content-center bg-light">
+        <li class="nav-item text-center d-none d-lg-block">
+          <img src="./img/left.png" alt="">
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">买家帮助</h5>
+          </a>
+          <a class="nav-link text-black" aria-current="page" href="#">新手指南</a>
+          <a class="nav-link text-black" aria-current="page" href="#">服务保障</a>
+          <a class="nav-link text-black" aria-current="page" href="#">常见问题</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">商家帮助</h5>
+          </a>
+          <a class="nav-link text-black" href="#">商家入驻</a>
+          <a class="nav-link text-black" href="#">商家后台</a>
+        </li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-black" aria-current="page" href="#">
+            <h5 class="mb-0">关于我们</h5>
+          </a>
+          <a class="nav-link text-black" href="#">联系我们</a>
+          <a class="nav-link text-black" href="#">广告投放</a>
+        </li>
+        <li class="nav-item text-center d-none d-lg-block">
+          <img src="./img/right.png" alt="">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    const ss = document.querySelector('#ss')
+    const ssbtn = document.querySelector('#ssbtn')
+    const ship = document.querySelector('#ship')
+    function list(e) {
+      var userInfo = window.sessionStorage.getItem('fname')
+      ss.value = userInfo
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', `http://127.0.0.1:3030/v2/pro/prolist?lname=${ss.value}`)
+      xhr.onload = function () {
+        let obj = JSON.parse(xhr.responseText)
+        if (obj.code == 200) {
+          ship.innerHTML = ''
+          for (var i = 0; i < obj.data.length; i++) {
+            ship.innerHTML += `
+            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2">
+                <div class="card">
+                  <img src="${obj.data[i].img}" alt="" style="height: 235px;">
+                  <div class="body">
+                    <h4 class="card-title">${obj.data[i].title}</h4>
+                    <p class="text-danger">￥${obj.data[i].price}</p>
+                    <p class="text-truncate">${obj.data[i].subtitle}</p>
+                  </div>
+                  <!-- 查看详情 -->
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-warning text-truncate join" data-title="${obj.data[i].title}">加入购物车</button>
+                    <button type="button" class="btn btn-outline-warning text-truncate">查看详情</button>
+                  </div>
+                </div>
+            </div>
+            `}
+        }
+        else {
+          alert('查询失败,请重试')
+        }
+      }
+      xhr.send()
+    }
+    ssbtn.onclick = function () {
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', `http://127.0.0.1:3030/v2/pro/prolist?lname=${ss.value}`)
+      xhr.onload = function () {
+        let obj = JSON.parse(xhr.responseText)
+        if (obj.code == 200) {
+          ship.innerHTML = ''
+          for (var i = 0; i < obj.data.length; i++) {
+            ship.innerHTML += `
+            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2">
+                <div class="card">
+                  <img src="${obj.data[i].img}" alt="" style="height: 235px;">
+                  <div class="body">
+                    <h4 class="card-title">${obj.data[i].title}</h4>
+                    <p class="text-danger">￥${obj.data[i].price}</p>
+                    <p class="text-truncate">${obj.data[i].subtitle}</p>
+                  </div>
+                  <!-- 查看详情 -->
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-warning text-truncate join" data-title="${obj.data[i].title}">加入购物车</button>
+                    <button type="button" class="btn btn-outline-warning text-truncate">查看详情</button>
+                  </div>
+                </div>
+            </div>
+            `
+          }
+        } else {
+          alert('查询失败,请重试')
+        }
+      }
+      xhr.send()
+    }
+    ss.onkeyup = function (e) {
+      if (e.keyCode == 13) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', `http://127.0.0.1:3030/v2/pro/prolist?lname=${ss.value}`)
+        xhr.onload = function () {
+          let obj = JSON.parse(xhr.responseText)
+          if (obj.code == 200) {
+            ship.innerHTML = ''
+            for (var i = 0; i < obj.data.length; i++) {
+              ship.innerHTML += `
+            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2">
+                <div class="card">
+                  <img src="${obj.data[i].img}" alt="" style="height: 235px;">
+                  <div class="body">
+                    <h4 class="card-title">${obj.data[i].title}</h4>
+                    <p class="text-danger">￥${obj.data[i].price}</p>
+                    <p class="text-truncate">${obj.data[i].subtitle}</p>
+                  </div>
+                  <!-- 查看详情 -->
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-warning text-truncate join" data-title="${obj.data[i].title}">加入购物车</button>
+                    <button type="button" class="btn btn-outline-warning text-truncate">查看详情</button>
+                  </div>
+                </div>
+            </div>
+            `
+            }
+          } else {
+            alert('查询失败,请检查输入项')
+          }
+        }
+        xhr.send()
+      }
+    }
+    function uname() {
+      let usernav = document.querySelector('#usernav')
+      var userInfo = window.sessionStorage.getItem('user_name')
+      if (userInfo) {
+        usernav.innerHTML = `
+          <li class="nav-item">
+            <a class="nav-link text-dark" aria-current="page" href="http://127.0.0.1:3030/Shoppingcart.html"><span class="bi-cart"></span>购物车</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#" style='user-select:none;'>欢迎:</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">${userInfo}</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">个人信息</a></li>
+              <li><a class="dropdown-item" href="#">实名认证</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" id="quit" href="javascript:location.reload();" onclick="window.sessionStorage.clear(); ">退出账号</a>
+              </li>
+            </ul>
+          </li>
+      `
+      } else {
+        usernav.innerHTML = `
+          <li class="nav-item" id="cart">
+            <a class="nav-link text-dark" aria-current="page" id="cart"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="http://127.0.0.1:3030/register.html">注册</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="http://127.0.0.1:3030/login.html">登录</a>
+          </li>
+        `
+      }
+    }
+    ship.onclick = function (e) {
+      if (e.target.className == "btn btn-outline-warning text-truncate join") {
+        var userInfo = window.sessionStorage.getItem('user_name')
+        let data = `user_name=${userInfo}&title=${e.target.dataset.title}`
+        let xhr = new XMLHttpRequest()
+        xhr.open('POST', `http://127.0.0.1:3030/v2/pro/postlist`)
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        xhr.onload = function () {
+          let obj = JSON.parse(xhr.responseText)
+          if (obj.code == 200) {
+            alert('添加成功')
+          } else {
+            alert('添加失败')
+          }
+        }
+        xhr.send(data)
+      }
+    }
+    window.onload = function () {
+      list();
+      uname();
+    }
+  </script>
+</body>
+
+</html>
